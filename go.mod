@@ -39,6 +39,7 @@ require (
 	github.com/mitchellh/go-homedir v1.1.0 // indirect
 	github.com/pingcap/errors v0.11.1
 	github.com/pingcap/kvproto v0.0.0-20190506024016-26344dff8f48 // indirect
+	github.com/pingcap/log v0.0.0-20210317133921-96f4fcab92a4
 	github.com/remyoudompheng/bigfft v0.0.0-20190512091148-babf20351dd7 // indirect
 	github.com/sirupsen/logrus v1.4.2 // indirect
 	github.com/smartystreets/goconvey v0.0.0-20190330032615-68dc04aab96a // indirect

@@ -22,6 +22,7 @@ import (
 
 	"github.com/pingcap/go-ycsb/pkg/prop"
 	"github.com/pingcap/go-ycsb/pkg/util"
+	"github.com/pingcap/log"
 
 	// mysql package
 	_ "github.com/go-sql-driver/mysql"
@@ -258,6 +259,10 @@ func (db *mysqlDB) Read(ctx context.Context, table string, key string, fields []
 }
 
 func (db *mysqlDB) Scan(ctx context.Context, table string, startKey string, count int, fields []string) ([]map[string][]byte, error) {
+	_, err := db.db.Exec(`set @@tidb_replica_read = 'leader-and-follower';`)
+	if err != nil {
+		log.Error("fail to set session variable" + err.Error())
+	}
 	var query string
 	if len(fields) == 0 {
 		query = fmt.Sprintf(`SELECT * FROM %s %s WHERE YCSB_KEY >= ? LIMIT ?`, table, db.forceIndexKeyword)
